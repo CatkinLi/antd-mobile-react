@@ -1,0 +1,24 @@
+.progress_h2{
+  color: #f7f7f7;
+  height: 60px;
+  margin: unset;
+  line-height: 60px;
+  text-align: center;
+
+  background-color: #d81e06;
+}
+.progress_title{
+  height: 100px;
+  background-color: #d81e06;
+}
+.progress_time{
+  color: #f7f7f7;
+  font-size: 14px;
+  margin-left: 20px;
+  background-color: #d81e06;
+}
+.progress_count{
+  margin: 10px;
+  height: 200px;
+  background-color: #f7f7f7;
+}

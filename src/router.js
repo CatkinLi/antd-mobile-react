@@ -4,6 +4,7 @@ import IndexPage from './routes/IndexPage';
 import Login from './routes/login/Login';
 import Home from './routes/homePage/Home';
 import Project from './routes/project/Project';
+import StationProgress from './routes/progress/StationProgress';
 
 function RouterConfig({ history }) {
   return (
@@ -13,6 +14,7 @@ function RouterConfig({ history }) {
         <Route path="/login" exact component={Login} />
         <Route path="/home" exact component={Home} />
         <Route path="/project" exact component={Project} />
+        <Route path="/progress" exact component={StationProgress} />
         <footer>
           here footer
         </footer>
