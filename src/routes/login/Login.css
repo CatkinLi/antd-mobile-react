@@ -1,0 +1,26 @@
+.login_normal {
+  height: 100%;
+  font-family: Georgia, sans-serif;
+  text-align: center;
+}
+
+.login_back {
+  height: 100%;
+  padding: 15px 0;
+  background: url(../../assets/login_back.jpg) no-repeat center 0;
+  background-size: 100%;
+}
+
+.login_title {
+  color: aliceblue;
+  font-size: 1.5rem;
+  font-weight: normal;
+  letter-spacing: -1px;
+}
+
+.login_logo {
+  margin-top: 50px;
+  padding: 100px 0;
+  background: url(../../assets/login_logo.png) no-repeat center 0;
+  background-size: 128px 128px;
+}

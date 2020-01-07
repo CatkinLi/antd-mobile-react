@@ -1,0 +1,16 @@
+.home_footer{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0
+}
+
+.home_h2{
+  color: #f7f7f7;
+  height: 60px;
+  margin: unset;
+  line-height: 60px;
+  text-align: center;
+
+  background-color: #d81e06;
+}
