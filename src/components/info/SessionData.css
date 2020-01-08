@@ -1,0 +1,51 @@
+.session_body{
+  margin: 5px 10px 10px 10px;
+  height: 600px;
+  background-color: #fff
+}
+
+
+.session_title{
+  padding: 10px;
+  display: flex;
+  height: 40px;
+  line-height: 40px;
+  background-color: #fff
+}
+
+.session_content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  background-color: #fff
+}
+
+.session_cell_title{
+  height: 30px;
+  line-height: 30px;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size:15px
+}
+
+.cell_title_num{
+  height: 30px;
+  line-height: 30px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.session_cell_text{
+  width: 32%;
+  color: #888888;
+  display: inline-grid;
+}
+
+.session_cell_num{
+  width: 32%;
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-grid;
+}
+

@@ -16,7 +16,7 @@ const data = [{
   value: 70,
 }, {
   gender: '订单',
-  value: 92.1,
+  value: 91,
 }];
 
 const scale = {
@@ -75,7 +75,7 @@ class StationProgress extends React.Component{
               />
             </div>
             <WhiteSpace size="sm"/>
-            <div style={{ margin: 10, height: 190, backgroundColor: '#d8f1ed' }}>
+            <div style={{ margin: 10, height: 190, backgroundColor: '#fff' }}>
               <div style={{ padding: 10 }}>
                 <div>
                   <span style={{ fontSize: 16, fontWeight: 550 }}>上海 8.9-8.11</span>
@@ -151,7 +151,7 @@ class StationProgress extends React.Component{
               </div>
             </div>
             <WhiteSpace size="sm"/>
-            <div style={{ margin: 10, height: 190, backgroundColor: '#d8f1ed' }}>
+            <div style={{ margin: 10, height: 190, backgroundColor: '#fff' }}>
               <div style={{ padding: 10 }}>
                 <div>
                   <span style={{ fontSize: 16, fontWeight: 550 }}>上海 8.9-8.11</span>
@@ -251,7 +251,7 @@ class StationProgress extends React.Component{
               </List>*/}
             </div>
             <WhiteSpace size="sm"/>
-            <div style={{ margin: 10, height: 190, backgroundColor: '#d8f1ed' }}>
+            <div style={{ margin: 10, height: 190, backgroundColor: '#fff' }}>
               <div style={{ padding: 10 }}>
                 <div>
                   <span style={{ fontSize: 16, fontWeight: 550 }}>上海 8.9-8.11</span>
@@ -351,7 +351,7 @@ class StationProgress extends React.Component{
               </List>*/}
             </div>
             <WhiteSpace size="sm"/>
-            <div style={{ margin: 10, height: 190, backgroundColor: '#d8f1ed' }}>
+            <div style={{ margin: 10, height: 190, backgroundColor: '#fff' }}>
               <div style={{ padding: 10 }}>
                 <div>
                   <span style={{ fontSize: 16, fontWeight: 550 }}>上海 8.9-8.11</span>

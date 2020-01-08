@@ -4,6 +4,7 @@ import { routerRedux } from 'dva/router';
 import { Button, WhiteSpace, Icon, WingBlank, InputItem, TabBar } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import Cost from '../../components/cost/Cost';
+import DataView from '../../components/info/DataView';
 import styles from './Home.css';
 
 const localStorage = window.localStorage;
@@ -11,7 +12,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'yellowTab',
+      selectedTab: 'blueTab',
       hidden: false,
       fullScreen: false,
     };
@@ -55,7 +56,7 @@ class Home extends React.Component {
             }}
             data-seed="logId"
           >
-            <span>我的账号</span>
+            <DataView/>
           </TabBar.Item>
           <TabBar.Item
             icon={

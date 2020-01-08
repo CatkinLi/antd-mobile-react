@@ -15,7 +15,7 @@ class Cost extends React.Component{
           <div className={ styles.circle }>
             上海
           </div>
-          <span>上海8.9-8.11(已开展)</span>
+          <span style={{ marginLeft: 20, color: '#f7f7f7' }}>上海8.9-8.11(已开展)</span>
         </div>
       </div>
     )
