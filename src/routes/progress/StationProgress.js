@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Grid, WhiteSpace, List, WingBlank, Button } from 'antd-mobile';
-import { createForm } from 'rc-form';
+import { Grid, WhiteSpace, List } from 'antd-mobile';
 import styles from './StationProgress.css';
 
 const data = [
@@ -53,13 +52,13 @@ class StationProgress extends React.Component{
               />
             </div>
             <WhiteSpace size="sm"/>
-            <div style={{ margin: 10 }}>
+            <div style={{ margin: 10, backgroundColor: '#d8f1ed' }}>
               <div>
                 <div>
                   上海 8.9-8.11<span style={{ marginLeft: 20, width: 60, backgroundColor: '#92c152'}}> 已开展</span>
                   <span style={{ float: 'right' }}>></span>
                 </div>
-                <div>
+                <div style={{ height: 80 }}>
                   索票
                 </div>
               </div>

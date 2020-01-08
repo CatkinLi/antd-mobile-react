@@ -1,21 +1,31 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Button, WhiteSpace, Icon, WingBlank, InputItem } from 'antd-mobile';
+import { routerRedux } from 'dva/router';
+import { Button, WhiteSpace, Toast, WingBlank, InputItem } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import styles from './Login.css';
+
+const localStorage = window.localStorage;
 
 class Login extends React.Component {
 
   handleSubmit = () => {
     const { form, dispatch } =this.props;
-    console.log(this.props);
-    console.log(dispatch);
     console.log(form.getFieldsValue());
     form.validateFields((err, values) => {
       if (!err) {
         dispatch({
           type: 'loginModel/login',
           payload: values,
+        }).then(({ data = {} }) => {
+          if (data.infoMap.authSuccess) {
+            localStorage.setItem('token', data.infoMap.token);
+            localStorage.setItem('realName', data.infoMap.realName);
+            localStorage.setItem('headerUrl', data.infoMap.headerUrl);
+            dispatch(routerRedux.push('/'));
+          } else {
+            Toast.fail(data.infoMap.reason,2);
+          }
         });
       }
     });
@@ -39,7 +49,7 @@ class Login extends React.Component {
           <WingBlank>
             <InputItem
               {...getFieldProps('userName')}
-              placeholder="请输入用户名"
+              placeholder="请输入CRM用户名"
             >
               <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '22px', width: '22px' }} />
             </InputItem>

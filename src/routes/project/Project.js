@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { ListView, WhiteSpace, Icon, WingBlank, InputItem } from 'antd-mobile';
-import { StickyContainer, Sticky } from 'react-sticky';
+import { ListView } from 'antd-mobile';
 import styles from './Project.css';
 const data = [
   {
