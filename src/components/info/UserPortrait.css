@@ -1,0 +1,14 @@
+.portrait_body{
+  margin: 5px 10px 10px 10px;
+  height: 600px;
+  background-color: #fff
+}
+
+
+.portrait_title{
+  padding: 10px;
+  display: flex;
+  height: 40px;
+  line-height: 40px;
+  background-color: #fff
+}
