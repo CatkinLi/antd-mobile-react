@@ -9,6 +9,7 @@
   "dependencies": {
     "antd-mobile": "^2.3.1",
     "babel-plugin-import": "^1.13.0",
+    "bizcharts": "^3.5.6",
     "dva": "^2.4.1",
     "history": "^4.10.1",
     "rc-form": "^2.4.11",
