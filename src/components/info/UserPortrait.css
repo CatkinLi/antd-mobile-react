@@ -1,14 +1,36 @@
 .portrait_body{
   margin: 5px 10px 10px 10px;
-  height: 600px;
+  background-color: #f2f3f7
+}
+
+.portrait_content{
+  padding: 10px;
   background-color: #fff
 }
 
-
 .portrait_title{
-  padding: 10px;
   display: flex;
-  height: 40px;
-  line-height: 40px;
   background-color: #fff
+}
+
+.portrait_chart{
+  margin: 10px;
+  height: 260px;
+}
+
+.portrait_title_left{
+  font-size: 20px;
+  font-weight: 500;
+  width: 50%;
+  margin-left: 10px
+}
+
+.portrait_circle{
+  float: right;
+  text-align: center;
+  width: 100px;
+  height: 25px;
+  line-height: 25px;
+  background-color: #f2f3f7;
+  border-radius: 25px;
 }
