@@ -1,0 +1,15 @@
+.before_body{
+  margin: 5px 10px 10px 10px;
+  background-color: #f2f3f7
+}
+
+.before_button{
+  text-align: center;
+  width: 40px;
+  border: 1px solid #d81e06;
+}
+
+.before_button_select{
+  background-color: #d81e06;
+}
+

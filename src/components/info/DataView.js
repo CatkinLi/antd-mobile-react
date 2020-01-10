@@ -4,6 +4,8 @@ import { Tabs, WhiteSpace, Badge } from 'antd-mobile';
 import { routerRedux } from 'dva/router';
 import SessionData from './SessionData';
 import UserPortrait from './UserPortrait';
+import BeforeSession from './BeforeSession';
+
 import styles from './DataView.css';
 
 const tabs = [
@@ -36,7 +38,7 @@ class DataView extends React.Component{
           >
             <SessionData />
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-              Content of second tab
+              <BeforeSession />
             </div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
               Content of third tab

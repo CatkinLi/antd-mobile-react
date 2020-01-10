@@ -18,6 +18,11 @@
   height: 260px;
 }
 
+.portrait_chart1{
+  margin: 10px;
+  height: 400px;
+}
+
 .portrait_title_left{
   font-size: 20px;
   font-weight: 500;
