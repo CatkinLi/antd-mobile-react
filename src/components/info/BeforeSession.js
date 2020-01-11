@@ -9,7 +9,7 @@ class BeforeSession extends React.Component{
     return(
       <div className={styles.before_body}>
         <div style={{ alignItems: 'center', display: 'flex' }}>
-          <div className={styles.before_button}>
+          <div className={`${styles.before_button} ${styles.before_button_select}`}>
             索票
           </div>
           <div className={styles.before_button}>

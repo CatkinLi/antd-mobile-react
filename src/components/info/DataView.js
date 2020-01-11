@@ -37,9 +37,7 @@ class DataView extends React.Component{
                 onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
           >
             <SessionData />
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-              <BeforeSession />
-            </div>
+            <BeforeSession />
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
               Content of third tab
             </div>
