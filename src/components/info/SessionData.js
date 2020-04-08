@@ -109,7 +109,7 @@ class SessionData extends React.Component{
           </div>
           <div style={{ height: 30, lineHeight: '20px',marginLeft: 20 }}>
             <div className={styles.session_cell_text}>
-              <span>portrait
+              <span>
                 比上届<span style={{ color: '#d81e06'}}>+0.2%</span>
               </span>
             </div>

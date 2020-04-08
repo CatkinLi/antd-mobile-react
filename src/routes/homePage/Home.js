@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
@@ -11,6 +12,7 @@ const localStorage = window.localStorage;
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.location.state.id);
     this.state = {
       selectedTab: 'blueTab',
       hidden: false,

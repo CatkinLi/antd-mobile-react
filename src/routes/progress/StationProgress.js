@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Grid, WhiteSpace, List } from 'antd-mobile';
 import { Chart, Tooltip, Geom, Guide } from 'bizcharts';
 import styles from './StationProgress.css';
+import {routerRedux} from "dva/router";
 
 const { Text } = Guide;
 const data = [{
@@ -48,8 +49,16 @@ const Item = List.Item;
 const Brief = Item.Brief;
 
 class StationProgress extends React.Component{
-    render(){
-      return(
+  constructor(props) {
+    super(props);
+    console.log(this.props.location.state.id);
+  }
+  cityData = (id) => {
+    console.log(id);
+    this.props.dispatch(routerRedux.push('/home',{ id: id }));
+  };
+  render(){
+    return(
         <div>
           <h2 className={ styles.progress_h2}>
             2019华夏家博秋季展
@@ -76,7 +85,7 @@ class StationProgress extends React.Component{
             </div>
             <WhiteSpace size="sm"/>
             <div style={{ margin: 10, height: 190, backgroundColor: '#fff' }}>
-              <div style={{ padding: 10 }}>
+              <div style={{ padding: 10 }} onClick={() => this.cityData(1)}>
                 <div>
                   <span style={{ fontSize: 16, fontWeight: 550 }}>上海 8.9-8.11</span>
                   <span className={styles.progress_on_time}> 已开展</span>
@@ -152,9 +161,9 @@ class StationProgress extends React.Component{
             </div>
             <WhiteSpace size="sm"/>
             <div style={{ margin: 10, height: 190, backgroundColor: '#fff' }}>
-              <div style={{ padding: 10 }}>
+              <div style={{ padding: 10 }} onClick={() => this.cityData(2)}>
                 <div>
-                  <span style={{ fontSize: 16, fontWeight: 550 }}>上海 8.9-8.11</span>
+                  <span style={{ fontSize: 16, fontWeight: 550 }}>重庆 8.9-8.11</span>
                   <span className={styles.progress_on_time}> 已开展</span>
                   <span style={{ float: 'right' }}></span>
                 </div>
@@ -252,9 +261,9 @@ class StationProgress extends React.Component{
             </div>
             <WhiteSpace size="sm"/>
             <div style={{ margin: 10, height: 190, backgroundColor: '#fff' }}>
-              <div style={{ padding: 10 }}>
+              <div style={{ padding: 10 }} onClick={() => this.cityData(3)}>
                 <div>
-                  <span style={{ fontSize: 16, fontWeight: 550 }}>上海 8.9-8.11</span>
+                  <span style={{ fontSize: 16, fontWeight: 550 }}>苏州 8.9-8.11</span>
                   <span className={styles.progress_on_time}> 已开展</span>
                   <span style={{ float: 'right' }}></span>
                 </div>

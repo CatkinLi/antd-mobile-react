@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
 import { ListView } from 'antd-mobile';
 import styles from './Project.css';
 const data = [
@@ -77,6 +78,7 @@ class Project extends React.Component{
   };
   handleData = (id) => {
     console.log(id);
+    this.props.dispatch(routerRedux.push('progress',{ id: id }));
   };
   render() {
     const { dataSource } = this.state;
@@ -98,22 +100,24 @@ class Project extends React.Component{
       }
       const obj = data[index--];
       return (
-        <div key={rowID} style={{ padding: '0 15px' }} onClick={ () => this.handleData(obj.id)}>
+        <div key={rowID} style={{ background: '#F5F5F9', padding: '0 15px' }} onClick={ () => this.handleData(obj.id)}>
           <div
             style={{
+              background: 'white',
+              padding: '0px 8px',
               lineHeight: '50px',
               fontSize: 18,
               borderBottom: '0px solid #F6F6F6',
             }}
           >{obj.name}</div>
-          <div style={{ display: '-webkit-box', display: 'flex', padding: '5px 0' }}>
-            <div style={{ lineHeight: 1 }}>
-              <div style={{ marginBottom: '8px',  fontWeight: 'bold' }}>
+          <div style={{ display: 'inline', background: 'white', padding: '5px 0' }}>
+            <div style={{ lineHeight: 1, padding: '0px 8px', background: 'white' }}>
+              <div style={{ paddingBottom: '8px',  fontWeight: 'bold' }}>
                 <span style={{ fontSize: '16px', color: '#d81e06', }}>{obj.total}</span>
                 <span style={{ color: '#888', }}> 展会用户{obj.id}</span>
               </div>
             </div>
-            <div style={{ marginTop: -30, marginLeft: 190 }}>
+            <div style={{ marginTop: -54, marginRight: 15, float: 'right' }}>
               <span style={{ fontSize: '30px', color: '#888' }}>></span>
             </div>
           </div>
@@ -126,7 +130,7 @@ class Project extends React.Component{
           选择展会项目
         </h2>
         <div style={{ margin: 20 }}>
-          <span>项目列表</span><span style={{ marginLeft: 80 }}>2019年8月9日 15:56:24</span>
+          <span>项目列表</span><span style={{ float: 'right', marginLeft: 80 }}>2019年8月9日 15:56:24</span>
         </div>
         <ListView
           ref={el => this.lv = el}
