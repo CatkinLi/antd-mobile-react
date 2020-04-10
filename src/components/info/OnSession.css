@@ -1,0 +1,75 @@
+.on_session_body{
+  justify-content: center;
+  background: #f2f3f7
+}
+
+.on_session_content1{
+  justify-content: center;
+  background: #ffffff;
+  display: flex;
+  padding: 20px 10px 50px 10px;
+}
+
+.on_session_content2{
+  justify-content: center;
+  background: #ffffff;
+  margin: 10px 15px 50px 15px;
+}
+
+
+.on_session_content2_time{
+  width: 23%;
+  color: grey;
+  border-radius: 25px;
+  line-height: 30px;
+  font-size: 16px;
+  margin: 0 0 0 15px;
+  border: 1px solid #f2f3f7;
+}
+
+.on_session_button{
+  text-align: center;
+  width: 100px;
+  line-height: 40px;
+  border: 1px solid #d81e06;
+}
+
+.on_session_content1_bottom{
+  position: absolute;
+  width: 260px;
+  top: 80px;
+}
+
+.on_session_title{
+  padding-top: 20px;
+  display: flex;
+  background-color: #fff
+}
+
+.on_session_title_left{
+  font-size: 20px;
+  font-weight: 500;
+  width: 50%;
+  margin-left: 20px
+}
+
+.on_session_circle{
+  float: right;
+  text-align: center;
+  width: 100px;
+  height: 25px;
+  line-height: 25px;
+  background-color: #f2f3f7;
+  border-radius: 25px;
+}
+
+.on_session_button_select{
+  color: #f7f7f7;
+  background-color: #d81e06;
+}
+
+.date_picker_list{
+  flex-basis: initial;
+}
+
+

@@ -247,7 +247,7 @@ class BeforeSession extends React.Component{
             </div>
           ) : (
             <div className={styles.before_content2}>
-              <div style={{ height: 360, marginTop: 20 }}>
+              <div style={{ height: 360, marginTop: 10 }}>
                 <div className={styles.before_title}>
                   <div className={styles.before_title_left}>
                     首访状态分布

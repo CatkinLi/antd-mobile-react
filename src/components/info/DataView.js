@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Tabs, WhiteSpace, Badge } from 'antd-mobile';
 import { routerRedux } from 'dva/router';
 import SessionData from './SessionData';
+import OnSession from './OnSession';
 import UserPortrait from './UserPortrait';
 import BeforeSession from './BeforeSession';
 
@@ -38,9 +39,7 @@ class DataView extends React.Component{
           >
             <SessionData />
             <BeforeSession />
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-              Content of third tab
-            </div>
+            <OnSession />
             <UserPortrait />
           </Tabs>
         </div>
