@@ -2,7 +2,9 @@
 const debugProd = false;
 // 是否开启打包生产环境
 let prodBuild = false;
-if (process.env.NODE_ENV === 'production') {
+console.log(process.env.NODE_ENV);
+console.log(process.env.API_ENV);
+if (process.env.API_ENV === 'prod') {
   prodBuild = true;
 }
 // 是否mock数据
@@ -19,7 +21,7 @@ let crmDomain = 'http://192.168.1.113:8089';
 // crm 1.0本地地址
 const devCrmDomain = 'http://localhost:8089';
 // webscoket服务
-let wsDomain = process.env.NODE_ENV === 'production' ? 'http://192.168.1.113:9094' : 'http://localhost:9094';
+let wsDomain = process.env.NODE_ENV === 'development' ? 'http://192.168.1.113:9094' : 'http://localhost:9094';
 if (debugProd) {
   devApi = 'http://crm2api.51jiabo.com';
 }
@@ -32,7 +34,7 @@ if (prodBuild) {
 
 
 export default function () {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.API_ENV === 'dev') {
     return { apiUri: devApi, wsDomain, webDomain, crmDomain: devCrmDomain };
   } else {
     return { apiUri: api, wsDomain, webDomain, crmDomain };

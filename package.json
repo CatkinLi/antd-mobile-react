@@ -1,8 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "start": "roadhog server",
+    "start": "cross-env API_ENV=dev roadhog server",
     "build": "roadhog build",
+    "build:test": "cross-env API_ENV=test roadhog build",
+    "build:test": "cross-env API_ENV=prod roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"
   },
