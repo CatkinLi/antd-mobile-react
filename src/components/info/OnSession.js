@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { DatePicker, List } from 'antd-mobile';
-import { Chart, Geom, Axis, Tooltip, Legend, Coord } from 'bizcharts';
+import { Chart, Geom, Axis, Tooltip, Label, Legend, Coord } from 'bizcharts';
 import { DataSet } from '@antv/data-set';
 import styles from './OnSession.css'
 
@@ -20,15 +20,22 @@ const CustomChildren = ({ extra, onClick, children }) => (
 );
 
 const circularCols = {
-  percent: {
-    formatter: val => (`${val * 100}%`),
+  amount: {
+    alias: '完成量',
+  },
+  rate: {
+    formatter: val => (`${(val * 100).toFixed(1)}%`),
+    alias: '完成率',
+  },
+  session: {
+    formatter: val => `${val}届`,
   },
 };
 
 class OnSession extends React.Component{
   state = {
     date: now,
-    selectTap: 'order',
+    selectTap: 'present',
   }
 
   selectValid = (type) => {
@@ -61,7 +68,37 @@ class OnSession extends React.Component{
       {item: 'A类客户', count: 28},
       {item: 'B类客户', count: 163},
       {item: 'E类客户', count: 30},
-    ]
+    ];
+
+    const stayTimeLayeringData = [
+      {'10-20' : 45, '0-10': 161, '20-30': 59, '>30' : 686, stayDate: '总体'},
+      {'10-20' : 18, '0-10': 63, '20-30': 26, '>30' : 276, stayDate: '11月08日'},
+      {'10-20' : 24, '0-10': 88, '20-30': 25, '>30' : 382, stayDate: '11月09日'},
+      {'10-20' : 3, '0-10': 10, '20-30': 8, '>30' : 28, stayDate: '11月10日'}
+    ];
+
+    const userStayTimeList = [
+      {advTime: 120.977, userType: "老用户", stayDate: "11月08日"},
+      {advTime: 61.7429, userType: "新用户", stayDate: "11月08日"},
+      {advTime: 69.1875, userType: "老用户", stayDate: "11月09日"},
+      {advTime: 83.0795, userType: "新用户", stayDate: "11月09日"},
+      {advTime: 20.6757, userType: "老用户", stayDate: "11月10日"},
+      {advTime: 39.25, userType: "新用户", stayDate: "11月10日"},
+    ];
+
+    const presentData = [
+      {session: 30, amount: 500, rate: 0.15 },
+      {session: 32, amount: 800, rate: 0.24 },
+      {session: 33, amount: 600, rate: 0.25 },
+      {session: 38, amount: 300, rate: 0.28 },
+      {session: 39, amount: 400, rate: 0.30 }
+    ];
+
+    const presentUserData = [
+      {date: '08月09日', count: 300 },
+      {date: '08月10日', count: 400 },
+      {date: '08月11日', count: 500 },
+    ];
 
     const srcData = [
       {src: "新浪", count: 1},
@@ -81,6 +118,13 @@ class OnSession extends React.Component{
     ];
     const ds = new DataSet({
 
+    });
+    const layeringData = ds.createView().source(stayTimeLayeringData);
+    layeringData.transform({
+      type: 'fold',
+      fields: ['0-10', '10-20', '20-30', '>30'],
+      key: '时间',
+      value: '停留人数',
     });
 
     const dv = ds.createView().source(srcData);
@@ -155,10 +199,10 @@ class OnSession extends React.Component{
     return(
       <div className={styles.on_session_body}>
         <div className={styles.on_session_content1}>
-          <div className={`${styles.on_session_button} ${ selectTap === 'order' ? styles.on_session_button_select : '' }`} onClick={() => this.selectValid('order')}>
+          <div className={`${styles.on_session_button} ${ selectTap === 'present' ? styles.on_session_button_select : '' }`} onClick={() => this.selectValid('present')}>
             到场
           </div>
-          <div className={`${styles.on_session_button} ${ selectTap === 'present' ? styles.on_session_button_select : '' }`} onClick={() => this.selectValid('present')}>
+          <div className={`${styles.on_session_button} ${ selectTap === 'order' ? styles.on_session_button_select : '' }`} onClick={() => this.selectValid('order')}>
             订单
           </div>
           <div className={`${styles.on_session_button} ${ selectTap === 'stay' ? styles.on_session_button_select : '' }`} onClick={() => this.selectValid('stay')}>
@@ -166,81 +210,77 @@ class OnSession extends React.Component{
           </div>
         </div>
         {
-          selectTap && selectTap === 'ticket' ? (
+          selectTap && selectTap === 'stay' ? (
             <div className={styles.on_session_content2}>
-              <div style={{ padding: '20px 20px 20px 20px',}}>
-                <div style={{ display: 'flex', textAlign: 'center' }}>
-                  <div style={{ lineHeight: '30px', fontSize: '15px' }}>时间范围 </div>
-                  <div className={styles.on_session_content2_time}>今天</div>
-                  <div className={styles.on_session_content2_time}>昨天</div>
-                  <div className={styles.on_session_content2_time}>近7天</div>
-                </div>
-                <div style={{ display: 'flex', margin: '20px 10px 10px 10px'}}>
-                  <div style={{ width: '46%', textAlign: 'center', borderBottom: '1px solid'}}>
-                    <DatePicker
-                      mode="date"
-                      title="选择开始时间"
-                      extra="开始时间"
-                      value={this.state.date}
-                      onChange={date => this.setState({ date })}
-                    >
-                      <CustomChildren></CustomChildren>
-                    </DatePicker>
-                  </div>
-                  <div style={{ lineHeight: '50px' }}>至</div>
-                  <div style={{ width: '46%', textAlign: 'center', borderBottom: '1px solid'}}>
-                    <DatePicker
-                      mode="date"
-                      title="选择结束时间"
-                      extra="结束时间"
-                      value={this.state.date}
-                      onChange={date => this.setState({ date })}
-                    >
-                      <CustomChildren></CustomChildren>
-                    </DatePicker>
-                  </div>
-                </div>
-              </div>
-              <div style={{ height: 400, marginTop: 20 }}>
+              <div style={{ height: 360, marginTop: 20 }}>
                 <div className={styles.on_session_title_left}>
-                  趋势
-                </div>
-                <div>
-                  <Chart  height={330} padding={[ 20, 50, 30, 50 ]} width={window.innerWidth} data={data} scale={cols}>
-                    <Axis name="time" />
-                    <Axis name="count" />
-                    <Legend />
-                    <Tooltip/>
-                    <Geom type="areaStack" position="time*count" color={'l(90) 0:#1890ff 0.5:#73c2f3 1:#ffffff'} />
-                    <Geom type="lineStack" position="time*count" tooltip={false}  size={1} />
-                  </Chart>
-                </div>
-              </div>
-              <div style={{ height: 400, marginTop: 20 }}>
-                <div className={styles.on_session_title_left}>
-                  来源渠道
+                  停留时间分层
                 </div>
                 <div>
                   <Chart
-                    height={360}
-                    data={dv}
-                    padding={[20, 30, 20, 90]}
+                    data={layeringData}
+                    height={320}
+                    padding={[30, 20, 80, 50]}
                     forceFit
                   >
-                    <Coord transpose />
+                    <Legend />
+                    <Axis name="时间" />
                     <Axis
-                      name="src"
-                      label={{
-                        offset: 12,
+                      name="停留人数"
+                    />
+                    <Tooltip
+                      crosshairs={{
+                        type: 'y',
                       }}
                     />
-                    <Axis name="count" grid={null} />
                     <Geom
                       type="interval"
-                      size={10}
-                      position="src*count"
-                      style={{ fill: 'l(0) 0:#d81e06 0.5:#ffd601 1:#f77c06' }}
+                      position="时间*停留人数"
+                      color={['stayDate',['#ff0000', '#00ff00', '#EAD8FF', '#ccffb1']]}
+                      adjust={[{ type: 'dodge', marginRatio: 0.1 }]}
+                    />
+                  </Chart>
+                </div>
+              </div>
+              <div style={{ height: 20, backgroundColor: '#f2f3f7', }}>
 
+              </div>
+              <div style={{ height: 360 }}>
+                <div className={styles.on_session_title_left}>
+                  新老用户停留时间对比
+                </div>
+                <div>
+                  <Chart
+                    height={320}
+                    padding={[30, 30, 80, 80]}
+                    data={userStayTimeList}
+                    scale={{ stayDate: { range: [0, 1] } }}
+                    forceFit
+                  >
+                    <Legend />
+                    <Axis name="stayDate" />
+                    <Axis
+                      name="advTime"
+                      label={{
+                        formatter: val => `${val}分钟`,
+                      }}
+                    />
+                    <Tooltip
+                      crosshairs={{
+                        type: 'y',
+                      }}
+                    />
+                    <Geom type="line" position="stayDate*advTime" size={2} color="userType" />
+                    <Geom
+                      type="point"
+                      position="stayDate*advTime"
+                      size={4}
+                      shape="circle"
+                      color="userType"
+                      style={{
+                        stroke: '#fff',
+                        lineWidth: 1,
+                      }}
                     />
                   </Chart>
                 </div>
@@ -248,103 +288,122 @@ class OnSession extends React.Component{
             </div>
           ) : (
             <div className={styles.on_session_content2}>
-              <div style={{ height: 360, marginTop: 20 }}>
+              <div style={{ height: 400, marginTop: 20 }}>
                 <div className={styles.on_session_title}>
                   <div className={styles.on_session_title_left}>
-                    首访状态分布
+                    {
+                      selectTap === 'order' ? '订单量' : '到场人流'
+                    }
                   </div>
+                </div>
+                <div style={{ display: 'flex', marginTop: 20, marginBottom: 20, textAlign: 'center' }}>
+                  <div className={styles.on_session_content2_time}>今年</div>
+                  <div className={styles.on_session_content2_time}>所有</div>
                   <div style={{ marginLeft: 0, width: '40%', color: '#888888'}}>
                     <div className={ styles.on_session_circle }>
-                      索票用户 ▾
+                      +展届对比
                     </div>
                   </div>
                 </div>
                 <div>
                   <Chart
-                    data={dvs}
+                    data={presentData}
                     height={300}
-                    padding={[10, 30, 80]}
+                    padding={[20, 50, 80]}
                     scale={circularCols}
                     forceFit
                   >
-                    <Coord type="theta" radius={0.8} innerRadius={0.7} />
-                    <Axis name="percent" />
-                    <Legend position="bottom" itemWidth={80} />
-                    <Tooltip
-                      showTitle={false}
-                      itemTpl='<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
+                    <Axis name="rate" />
+                    <Legend />
+                    <Tooltip />
+                    <Geom type="line" position="session*amount" color="#3182bd" />
+                    <Geom
+                      type="line"
+                      position="session*rate"
+                      color="#f7629e"
+                    >
+                    </Geom>
+                    <Geom
+                      type="point"
+                      position="session*rate"
+                      color="#f7629e"
+                      size={3}
+                      shape="circle"
                     />
                     <Geom
-                      type="intervalStack"
-                      position="percent"
-                      color={['item', ['#f7629e', '#ffce3d']]}
-                      tooltip={['item*percent', (item, percent) => {
-                        return {
-                          name: item,
-                          value: `${(percent * 100).toFixed(1)}%`,
-                        };
-                      }]}
-                      style={{ lineWidth: 1, stroke: '#fff' }}
-                    >
-                      {/*<Label
-                  content="percent"
-                  formatter={(val, item) => {
-                    return ` ${item.point.item} : ${(item.point.count).toFixed(0)} \n\r${(item.point.percent * 100).toFixed(1)}% `;
-                  }}
-                />*/}
-                    </Geom>
+                    type="point"
+                    position="session*amount"
+                    color="#3182bd"
+                    size={3}
+                    shape="circle"
+                  />
                   </Chart>
                 </div>
               </div>
               <div style={{ height: 20, backgroundColor: '#f2f3f7', }}>
 
               </div>
-              <div style={{ height: 360, paddingTop: 20, display: 'none' }}>
+              <div style={{ height: 360 }}>
                 <div className={styles.on_session_title}>
                   <div className={styles.on_session_title_left}>
-                    二访状态分布
-                  </div>
-                  <div style={{ marginLeft: 0, width: '40%', color: '#888888'}}>
-                    <div className={ styles.on_session_circle }>
-                      索票用户 ▾
-                    </div>
+                    {
+                      selectTap === 'order' ? '每日订单' : '每日到场人流'
+                    }
                   </div>
                 </div>
                 <div>
                   <Chart
-                    data={dvs}
                     height={300}
-                    padding={[10, 30, 80]}
-                    scale={circularCols}
-                    forceFit
+                    data={presentUserData}
+                    padding={[20, 140, 40, 60]}
                   >
-                    <Coord type="theta" radius={0.8} innerRadius={0.7} />
-                    <Axis name="percent" />
-                    <Legend position="bottom" itemWidth={80} />
+                    <Axis name="date" />
+                    <Axis name="count" />
                     <Tooltip
-                      showTitle={false}
-                      itemTpl='<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
+                      crosshairs={{
+                        type: 'y',
+                      }}
                     />
-                    <Geom
-                      type="intervalStack"
-                      position="percent"
-                      color={['item', ['#f7629e', '#ffce3d']]}
-                      tooltip={['item*percent', (item, percent) => {
-                        return {
-                          name: item,
-                          value: `${(percent * 100).toFixed(1)}%`,
-                        };
-                      }]}
-                      style={{ lineWidth: 1, stroke: '#fff' }}
-                    >
-                      {/*<Label
-                  content="percent"
-                  formatter={(val, item) => {
-                    return ` ${item.point.item} : ${(item.point.count).toFixed(0)} \n\r${(item.point.percent * 100).toFixed(1)}% `;
-                  }}
-                />*/}
-                    </Geom>
+                    <Geom size={50} type="interval" position="date*count" />
                   </Chart>
+                </div>
+              </div>
+              <div style={{ height: 20, backgroundColor: '#f2f3f7', }}>
+
+              </div>
+              <div style={{ height: 360 }}>
+                <div className={styles.on_session_title}>
+                  <div className={styles.on_session_title_left}>
+                    {
+                      selectTap === 'order' ? '来源渠道' : '来源渠道'
+                    }
+                  </div>
+                </div>
+                <div style={{ margin: 20 }}>
+                  <div className={styles.on_session_table_tr}>
+                    <div className={ styles.on_session_table_th }>排名</div>
+                    <div className={ styles.on_session_table_td }>渠道</div>
+                    <div className={ styles.on_session_table_th }>数量</div>
+                    <div className={ styles.on_session_table_th }>占比</div>
+                  </div>
+                  <div className={styles.on_session_table_trd}>
+                    <div className={ styles.on_session_table_th }>1</div>
+                    <div className={ styles.on_session_table_td }>现场新增</div>
+                    <div className={ styles.on_session_table_th }>2234</div>
+                    <div className={ styles.on_session_table_th }>30%</div>
+                  </div>
+                  <div className={styles.on_session_table_trd}>
+                    <div className={ styles.on_session_table_th }>1</div>
+                    <div className={ styles.on_session_table_td }>现场新增</div>
+                    <div className={ styles.on_session_table_th }>2234</div>
+                    <div className={ styles.on_session_table_th }>30%</div>
+                  </div>
+                  <div className={styles.on_session_table_trd}>
+                    <div className={ styles.on_session_table_th }>1</div>
+                    <div className={ styles.on_session_table_td }>现场新增</div>
+                    <div className={ styles.on_session_table_th }>2234</div>
+                    <div className={ styles.on_session_table_th }>30%</div>
+                  </div>
                 </div>
               </div>
             </div>

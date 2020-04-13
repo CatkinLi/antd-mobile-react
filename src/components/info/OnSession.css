@@ -41,15 +41,15 @@
 }
 
 .on_session_title{
-  padding-top: 20px;
   display: flex;
   background-color: #fff
 }
 
 .on_session_title_left{
+  padding-top: 20px;
   font-size: 20px;
   font-weight: 500;
-  width: 50%;
+  width: 60%;
   margin-left: 20px
 }
 
@@ -57,8 +57,9 @@
   float: right;
   text-align: center;
   width: 100px;
-  height: 25px;
-  line-height: 25px;
+  height: 30px;
+  font-size: 16px;
+  line-height: 30px;
   background-color: #f2f3f7;
   border-radius: 25px;
 }
@@ -67,6 +68,37 @@
   color: #f7f7f7;
   background-color: #d81e06;
 }
+
+.on_session_table_tr{
+  background: #f2f3f7;
+  display: flex;
+  font-size: 18px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+}
+
+.on_session_table_trd{
+  display: flex;
+  font-size: 18px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  border-bottom:1px solid #f2f3f7;
+}
+
+
+
+.on_session_table_th{
+  margin-left: 20px;
+  width: 22%;
+}
+
+.on_session_table_td{
+  margin-left: 20px;
+  width: 34%;
+}
+
 
 .date_picker_list{
   flex-basis: initial;
