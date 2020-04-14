@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { WhiteSpace } from 'antd-mobile';
+import { WhiteSpace, Picker, List } from 'antd-mobile';
 import { Chart, Axis, Geom, Tooltip, Legend, Coord, Guide } from 'bizcharts';
 
 import { DataSet } from '@antv/data-set';
@@ -52,6 +52,12 @@ const userChartData = [
   { item: '新用户', count: 30 },
   { item: '老用户', count: 80 },
 ];
+const srcTypeList = [
+  { value: 'venueUserCount', label: '展会用户' },
+  { value: 'getTicketUserCount', label: '索票用户' },
+  { value: 'newUserCount', label: '新用户' },
+  { value: 'oldUserCount', label: '老用户' },
+];
 const ds = new DataSet({
   state: {
     chartData: [],
@@ -75,9 +81,29 @@ du.transform({
   as: 'percent',
 });
 
+const CustomChildren = props => (
+  <div
+    onClick={props.onClick}
+  >
+    {props.extra} ▾
+  </div>
+);
+
+
 
 
 class UserPortrait extends React.Component{
+
+  state = {
+    srcType: ['venueUserCount'],
+  };
+
+  onChangeSrcType = (srcType) => {
+    console.log(srcType);
+    this.setState({
+      srcType,
+    });
+  };
 
   render() {
     const userHtml = `<div style="color:#8c8c8c;font-size:1.16em;text-align: center;width: 10em;">展会用户</div>`;
@@ -149,7 +175,14 @@ class UserPortrait extends React.Component{
             </div>
             <div style={{ marginLeft: 40, width: '50%', color: '#888888'}}>
               <div className={ styles.portrait_circle }>
-                展会用户 ▾
+                <Picker
+                  data={srcTypeList}
+                  value={this.state.srcType}
+                  cols={1}
+                  onChange={this.onChangeSrcType}
+                >
+                  <CustomChildren></CustomChildren>
+                </Picker>
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { DatePicker, List } from 'antd-mobile';
 import { Chart, Geom, Axis, Tooltip, Label, Legend, Coord } from 'bizcharts';
+import nike from '../../assets/nike.png';
 import { DataSet } from '@antv/data-set';
 import styles from './OnSession.css'
 
@@ -196,8 +197,58 @@ class OnSession extends React.Component{
         alias: '人数'
       }
     };
+    const listData = [
+      {name:'第11届(10.1 - 10.3日)','checked':false},
+      {name:'第10届(10.1 - 10.3日)','checked':true},
+      {name:'第9届(10.1 - 10.3日)','checked':true},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第10届(10.1 - 10.3日)','checked':true},
+      {name:'第9届(10.1 - 10.3日)','checked':true},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第10届(10.1 - 10.3日)','checked':true},
+      {name:'第9届(10.1 - 10.3日)','checked':true},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第8届(10.1 - 10.3日)','checked':false},
+      {name:'第7届(10.1 - 10.3日)','checked':false}
+    ];
     return(
       <div className={styles.on_session_body}>
+        <div className={styles.on_session_pupop} style={{ display: 'block'}}>
+          <ul className={styles.list}>
+            <p className={styles.title}>请选择对比展届</p>
+            <ul className={styles.listNum}>
+              {
+                listData.map((item, index) => {
+                  return (
+                    <li>
+                      <p>{item.name}</p>
+                      <img src={nike} />
+                    </li>
+                  )
+                })
+              }
+            </ul>
+            <div className={styles.btns}>
+              <p className={styles.cancel}>取消</p>
+              <p className={styles.next}>确定</p>
+            </div>
+          </ul>
+        </div>
         <div className={styles.on_session_content1}>
           <div className={`${styles.on_session_button} ${ selectTap === 'present' ? styles.on_session_button_select : '' }`} onClick={() => this.selectValid('present')}>
             到场
@@ -309,7 +360,7 @@ class OnSession extends React.Component{
                   <Chart
                     data={presentData}
                     height={300}
-                    padding={[20, 50, 80]}
+                    padding={[20, 50, 100]}
                     scale={circularCols}
                     forceFit
                   >
@@ -409,6 +460,7 @@ class OnSession extends React.Component{
             </div>
           )
         }
+
       </div>
     )
   }

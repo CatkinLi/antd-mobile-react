@@ -3,6 +3,71 @@
   background: #f2f3f7
 }
 
+.on_session_pupop{
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .4);
+  position: fixed;
+}
+
+.on_session_pupop .list{
+  width: 100%;
+  background: #fff;
+}
+
+.on_session_pupop .list .title{
+  font-size: 1rem;
+  padding: 1.2rem .8rem;
+  line-height: .3rem;
+  font-weight: 900;
+  text-indent: .4rem;
+}
+
+.on_session_pupop .list .listNum{
+  padding-bottom: 1rem
+}
+
+.on_session_pupop .list .listNum li{
+  height: 1.2rem;
+  border-bottom: 1px solid #eeeeee;
+  font-size: 1rem;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.on_session_pupop .list .btns{
+  width: 100%;
+  height: 2rem;
+  display: flex;
+ }
+
+.on_session_pupop .list .btns p{
+  width: 50%;
+  text-align: center;
+  line-height: 2rem;
+  font-size: .8rem
+}
+
+.on_session_pupop .list .listNum li img {
+  width: 1.5rem;
+  height: .69rem;
+  display: block;
+}
+.on_session_pupop .list .btns p.cancel{
+  background: #f2f3f7;
+  color: #323335;
+}
+
+.on_session_pupop .list .btns p.next{
+  background: #ff2a3c;
+  color: #fff;
+}
+
+
+
 .on_session_content1{
   justify-content: center;
   background: #ffffff;
@@ -102,6 +167,170 @@
 
 .date_picker_list{
   flex-basis: initial;
+}
+
+
+
+html, body {
+  color: #222;
+  margin: 0 auto !important;
+  -webkit-font-smoothing: antialiased;
+  font-family: "微软雅黑", "Microsoft YaHei", SimHei, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+/* html,body,#app{
+  min-width: 1200px;
+} */
+body {
+  /* background: #f4f4f4; */
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-style: normal;
+  font-weight: normal;
+  /* -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; */
+}
+
+ul li, ol li {
+  list-style: none;
+}
+
+input, button {
+  -webkit-appearance: none;
+  /* outline: none; */
+  border-radius: 0;
+  /* border: none; */
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+/* 清楚浮动 */
+
+.clear {
+  clear: both;
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+/*弹性布局*/
+
+.flex-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.flex-between {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.verticalHorizontal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+/* 单行文字隐藏 */
+
+.text-hidden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 多行文字隐藏 */
+
+.text-hidden-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* element-ui全局样式 */
+.el-breadcrumb{
+  margin-bottom: 15px;
+  font-size: 12px;
+}
+.el-card{
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
+}
+.el-table{
+  margin-top:15px;
+  font-size:12px;
 }
 
 
