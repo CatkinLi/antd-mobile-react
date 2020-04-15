@@ -19,8 +19,28 @@ const data = [
     name: '2019 华夏家博春季展',
     total: `200万`,
   },
+  {
+    id: 4,
+    name: '2019 华夏家博春季展',
+    total: `200万`,
+  },
+  {
+    id: 5,
+    name: '2019 华夏家博春季展',
+    total: `200万`,
+  },
+  {
+    id: 6,
+    name: '2019 华夏家博春季展',
+    total: `200万`,
+  },
+  {
+    id: 7,
+    name: '2019 华夏家博春季展',
+    total: `200万`,
+  },
 ];
-const NUM_ROWS = 5;
+const NUM_ROWS = 8;
 let pageIndex = 0;
 
 
@@ -57,37 +77,23 @@ class Project extends React.Component{
     this.rData = genData();
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this.rData),
-      isLoading: false,
+      isLoading: NUM_ROWS > 7
     });
   }
   onEndReached = (event) => {
-    console.log(this.state.isLoading);
-    console.log(this.state.hasMore);
-    if (this.state.isLoading && !this.state.hasMore) {
-      return;
-    }
-    console.log('reach end', event);
-    this.setState({ isLoading: true });
-    /*setTimeout(() => {
-      this.rData = { ...this.rData, ...genData(++pageIndex) };
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        isLoading: false,
-      });
-    }, 10000);*/
+    this.setState({ isLoading: false });
   };
   handleData = (id) => {
     console.log(id);
     this.props.dispatch(routerRedux.push('progress',{ id: id }));
   };
   render() {
-    const { dataSource } = this.state;
     const separator = (sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
         style={{
           backgroundColor: '#F5F5F9',
-          height: 8,
+          height: 15,
           borderTop: '1px solid #ECECED',
           borderBottom: '1px solid #ECECED',
         }}
@@ -105,11 +111,12 @@ class Project extends React.Component{
             style={{
               background: 'white',
               padding: '0px 8px',
-              lineHeight: '50px',
+              lineHeight: '56px',
               fontSize: 18,
               borderBottom: '0px solid #F6F6F6',
             }}
-          >{obj.name}</div>
+          >{obj.name}
+          </div>
           <div style={{ display: 'inline', background: 'white', padding: '5px 0' }}>
             <div style={{ lineHeight: 1, padding: '0px 8px', background: 'white' }}>
               <div style={{ paddingBottom: '8px',  fontWeight: 'bold' }}>
@@ -135,6 +142,7 @@ class Project extends React.Component{
         <ListView
           ref={el => this.lv = el}
           dataSource={this.state.dataSource}
+          initialListSize={7}
           renderHeader={null}
           renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
             {this.state.isLoading ? 'Loading...' : '已经到底了'}
@@ -142,12 +150,12 @@ class Project extends React.Component{
           renderRow={row}
           renderSeparator={separator}
           className="am-list"
-          pageSize={4}
+          pageSize={1}
           useBodyScroll
           onScroll={() => { console.log('scroll'); }}
           scrollRenderAheadDistance={500}
           onEndReached={this.onEndReached}
-          onEndReachedThreshold={10}
+          onEndReachedThreshold={1000}
         />
       </div>
     )
