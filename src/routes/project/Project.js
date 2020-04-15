@@ -40,7 +40,7 @@ const data = [
     total: `200万`,
   },
 ];
-const NUM_ROWS = 8;
+const NUM_ROWS = 9;
 let pageIndex = 0;
 
 
