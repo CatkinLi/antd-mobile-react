@@ -17,6 +17,10 @@ const tabs = [
 ];
 
 class DataView extends React.Component{
+  state = {
+    selectIds: [222,223],
+  };
+
   render(){
     return(
       <div>

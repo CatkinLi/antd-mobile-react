@@ -36,8 +36,10 @@ const circularCols = {
 class OnSession extends React.Component{
   state = {
     date: now,
+    displayMultiple: 'none',
     selectTap: 'present',
-  }
+    selectIds: [],
+  };
 
   selectValid = (type) => {
     if (type === 'order') {
@@ -53,8 +55,34 @@ class OnSession extends React.Component{
         selectTap: 'stay',
       })
     }
+  };
 
-  }
+  handleMultiple = (id) => {
+    console.log(id);
+    const { selectIds } = this.state;
+    if (selectIds.includes(id)) {
+      this.setState({
+        selectIds: selectIds.filter(ids => ids !== id),
+      });
+    } else {
+      selectIds.push(id);
+      this.setState({
+        selectIds,
+      })
+    }
+  };
+
+  clickCancel = () => {
+    this.setState({
+      displayMultiple: 'none',
+    })
+  };
+
+  clickConfirm = () => {
+    const { selectIds } = this.state;
+    console.log(selectIds);
+  };
+
 
   render(){
     const { selectTap } = this.state;
@@ -198,54 +226,43 @@ class OnSession extends React.Component{
       }
     };
     const listData = [
-      {name:'第11届(10.1 - 10.3日)','checked':false},
-      {name:'第10届(10.1 - 10.3日)','checked':true},
-      {name:'第9届(10.1 - 10.3日)','checked':true},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第10届(10.1 - 10.3日)','checked':true},
-      {name:'第9届(10.1 - 10.3日)','checked':true},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第10届(10.1 - 10.3日)','checked':true},
-      {name:'第9届(10.1 - 10.3日)','checked':true},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第8届(10.1 - 10.3日)','checked':false},
-      {name:'第7届(10.1 - 10.3日)','checked':false}
+      {beginDate: "01.14", cityName: "上海", endDate: "01.14", session: 13, id: 222, cityId: 1},
+      {beginDate: "01.09", cityName: "上海", endDate: "01.11", session: 16, id: 223, cityId: 1},
+      {beginDate: "01.30", cityName: "上海", endDate: "01.31", session: 17, id: 213, cityId: 1},
+      {beginDate: "01.09", cityName: "上海", endDate: "01.11", session: 17, id: 2043, cityId: 1},
+      {beginDate: "01.13", cityName: "上海", endDate: "01.15", session: 13, id: 2056, cityId: 2},
+      {beginDate: "01.01", cityName: "上海", endDate: "01.03", session: 15, id: 2010, cityId: 2},
+      {beginDate: "04.11", cityName: "上海", endDate: "04.13", session: 117, id: 2058, cityId: 2},
+      {beginDate: "01.04", cityName: "上海", endDate: "01.06", session: 18, id: 2054, cityId: 2},
     ];
     return(
       <div className={styles.on_session_body}>
-        <div className={styles.on_session_pupop} style={{ display: 'block'}}>
+        <div className={styles.on_session_pupop} style={{ display: this.state.displayMultiple }}>
           <ul className={styles.list}>
             <p className={styles.title}>请选择对比展届</p>
             <ul className={styles.listNum}>
               {
                 listData.map((item, index) => {
                   return (
-                    <li>
-                      <p>{item.name}</p>
-                      <img src={nike} />
+                    <li key={index} onClick={() => this.handleMultiple(item.id)}>
+                      {
+                        this.state.selectIds.includes(item.id) ? (
+                          <p style={{ color: 'red' }}>{`第${item.session}届 ( ${item.beginDate} - ${item.endDate} )`}</p>
+                        ) : (
+                          <p>{`第${item.session}届 ( ${item.beginDate} - ${item.endDate} )`}</p>
+                        )
+                      }
+                      {
+                        this.state.selectIds.includes(item.id) ? (<img src={nike} />) : null
+                      }
                     </li>
                   )
                 })
               }
             </ul>
             <div className={styles.btns}>
-              <p className={styles.cancel}>取消</p>
-              <p className={styles.next}>确定</p>
+              <p onClick={this.clickCancel} className={styles.cancel}>取消</p>
+              <p onClick={this.clickConfirm} className={styles.next}>确定</p>
             </div>
           </ul>
         </div>
@@ -351,7 +368,7 @@ class OnSession extends React.Component{
                   <div className={styles.on_session_content2_time}>今年</div>
                   <div className={styles.on_session_content2_time}>所有</div>
                   <div style={{ marginLeft: 0, width: '40%', color: '#888888'}}>
-                    <div className={ styles.on_session_circle }>
+                    <div onClick={() => this.setState({ displayMultiple: 'block' })} className={ styles.on_session_circle }>
                       +展届对比
                     </div>
                   </div>

@@ -29,7 +29,6 @@
 }
 
 .on_session_pupop .list .listNum li{
-  height: 1.2rem;
   border-bottom: 1px solid #eeeeee;
   font-size: 1rem;
   padding: 20px;
@@ -52,8 +51,8 @@
 }
 
 .on_session_pupop .list .listNum li img {
-  width: 1.5rem;
-  height: .69rem;
+  width: 1.2rem;
+  height: 1rem;
   display: block;
 }
 .on_session_pupop .list .btns p.cancel{
