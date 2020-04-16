@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { DatePicker, List } from 'antd-mobile';
-import { Chart, Geom, Axis, Tooltip, Label, Legend, Coord } from 'bizcharts';
+import { Chart, Geom, Axis, Tooltip, Label, Legend, Coord, View } from 'bizcharts';
 import nike from '../../assets/nike.png';
 import { DataSet } from '@antv/data-set';
 import styles from './OnSession.css'
@@ -21,15 +21,10 @@ const CustomChildren = ({ extra, onClick, children }) => (
 );
 
 const circularCols = {
-  amount: {
-    alias: '完成量',
-  },
-  rate: {
-    formatter: val => (`${(val * 100).toFixed(1)}%`),
-    alias: '完成率',
-  },
-  session: {
-    formatter: val => `${val}届`,
+  scaleIndex: {
+    alias: '刻度',
+    range: [0,1],
+    tickCount: 5,
   },
 };
 
@@ -116,11 +111,13 @@ class OnSession extends React.Component{
     ];
 
     const presentData = [
-      {session: 30, amount: 500, rate: 0.15 },
-      {session: 32, amount: 800, rate: 0.24 },
-      {session: 33, amount: 600, rate: 0.25 },
-      {session: 38, amount: 300, rate: 0.28 },
-      {session: 39, amount: 400, rate: 0.30 }
+      {scaleIndex: "第34届", 到场率: 0.0988, 到场用户: 7414 },
+      {scaleIndex: "第35届", 到场率: 0.1853, 到场用户: 15042 },
+      {scaleIndex: "第36届", 到场率: 0.1801, 到场用户: 14650 },
+      {scaleIndex: "第37届", 到场率: 0.1235, 到场用户: 11894 },
+      {scaleIndex: "第38届", 到场率: 0.1933, 到场用户: 15148 },
+      {scaleIndex: "第39届", 到场率: 0.1572, 到场用户: 1320 },
+      {scaleIndex: "第40届", 到场率: 0, 到场用户: 1 }
     ];
 
     const presentUserData = [
@@ -146,7 +143,11 @@ class OnSession extends React.Component{
       {src: "西瓜视频", count: 10591}
     ];
     const ds = new DataSet({
-
+      state: {
+        chartData: presentData,
+        leftFold: ['到场用户'],
+        rightFold: ['到场率'],
+      }
     });
     const layeringData = ds.createView().source(stayTimeLayeringData);
     layeringData.transform({
@@ -169,6 +170,20 @@ class OnSession extends React.Component{
       field: 'count',
       dimension: 'item',
       as: 'percent'
+    });
+    const dvl = ds.createView().source(presentData);
+    dvl.transform({
+      type: 'fold',
+      fields: ds.state.leftFold.length > 0 ? ds.state.leftFold : ['订单量'],
+      key: 'target',
+      value: 'value',
+    });
+    const dvr = ds.createView().source(presentData);
+    dvr.transform({
+      type: 'fold',
+      fields: ds.state.rightFold.length > 0 ? ds.state.rightFold : ['订单率'],
+      key: 'target',
+      value: 'value',
     });
     const data = [
       {
@@ -381,30 +396,55 @@ class OnSession extends React.Component{
                     scale={circularCols}
                     forceFit
                   >
-                    <Axis name="rate" />
-                    <Legend />
-                    <Tooltip />
-                    <Geom type="line" position="session*amount" color="#3182bd" />
-                    <Geom
-                      type="line"
-                      position="session*rate"
-                      color="#f7629e"
-                    >
-                    </Geom>
-                    <Geom
-                      type="point"
-                      position="session*rate"
-                      color="#f7629e"
-                      size={3}
-                      shape="circle"
+                    <Tooltip crosshairs={{ type: 'y' }} />
+                    <Legend
+                      position="bottom"
+                      title={null}
+                      dx={20}
                     />
-                    <Geom
-                    type="point"
-                    position="session*amount"
-                    color="#3182bd"
-                    size={3}
-                    shape="circle"
-                  />
+                    <View data={dvl}>
+                      <Axis name="scaleIndex" />
+                      <Geom
+                        type="line"
+                        position="scaleIndex*value"
+                        color={["target", "#f7629e"]}
+                      />
+                      <Geom
+                        type="point"
+                        position="scaleIndex*value"
+                        color={["target", "#f7629e"]}
+                        size={3}
+                        shape="circle"
+                      />
+                    </View>
+                    <View data={dvr}>
+                      <Axis name="scaleIndex" />
+                      <Axis position="right" name="value" label={{ formatter: val => `${(val * 100).toFixed(1)}%` }} />
+                      <Geom
+                        type="line"
+                        position="scaleIndex*value"
+                        color={["target", "#3182bd"]}
+                        tooltip={['target*value', (target, value) => {
+                          return {
+                            name: target,
+                            value: `${(value * 100).toFixed(1)}%`,
+                          };
+                        }]}
+                      />
+                      <Geom
+                        type="point"
+                        position="scaleIndex*value"
+                        color="#3182bd"
+                        size={3}
+                        shape="circle"
+                        tooltip={['target*value', (target, value) => {
+                          return {
+                            name: target,
+                            value: `${(value * 100).toFixed(1)}%`,
+                          };
+                        }]}
+                      />
+                    </View>
                   </Chart>
                 </div>
               </div>

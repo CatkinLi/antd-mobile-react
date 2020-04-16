@@ -21,6 +21,9 @@ class Login extends React.Component {
           if (data.infoMap.authSuccess) {
             localStorage.setItem('token', data.infoMap.token);
             localStorage.setItem('realName', data.infoMap.realName);
+            localStorage.setItem('userName', data.infoMap.userName);
+            localStorage.setItem('cityName', data.infoMap.cityName);
+            localStorage.setItem('department', data.infoMap.department);
             localStorage.setItem('headerUrl', data.infoMap.headerUrl);
             dispatch(routerRedux.push('/'));
           } else {

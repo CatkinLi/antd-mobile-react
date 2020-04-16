@@ -17,6 +17,10 @@ class Home extends React.Component {
       selectedTab: 'blueTab',
       hidden: false,
       fullScreen: false,
+      userName: localStorage.getItem("userName"),
+      realName: localStorage.getItem("realName"),
+      cityName: localStorage.getItem("cityName"),
+      department: localStorage.getItem("department"),
     };
   }
   loginOut = () => {
@@ -109,7 +113,7 @@ class Home extends React.Component {
                 <tbody>
                 <tr>
                   <td style={{ width: 100, fontSize: 16 }}>用户名</td>
-                  <td>张三</td>
+                  <td>{this.state.userName}</td>
                 </tr>
                 <tr>
                   <td>
@@ -118,7 +122,7 @@ class Home extends React.Component {
                 </tr>
                 <tr>
                   <td>所在城市</td>
-                  <td>上海</td>
+                  <td>{this.state.cityName}</td>
                 </tr>
                 <tr>
                   <td>
@@ -127,7 +131,7 @@ class Home extends React.Component {
                 </tr>
                 <tr>
                   <td>部门</td>
-                  <td>总公司</td>
+                  <td>{this.state.department}</td>
                 </tr>
                 <tr>
                   <td>
@@ -136,7 +140,7 @@ class Home extends React.Component {
                 </tr>
                 <tr>
                   <td>姓名</td>
-                  <td>真实姓名</td>
+                  <td>{this.state.realName}</td>
                 </tr>
                 </tbody>
               </table>
