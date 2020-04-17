@@ -10,6 +10,8 @@ const app = dva({ history:createHistory()});
 
 // 3. Model
  app.model(require('./models/login/loginModel').default);
+app.model(require('./models/project/projectModel').default);
+
 
 // 4. Router
 app.router(require('./router').default);

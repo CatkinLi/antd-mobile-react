@@ -40,18 +40,10 @@ const data = [
     total: `200万`,
   },
 ];
-const NUM_ROWS = 9;
+let NUM_ROWS = 9;
 let pageIndex = 0;
 
 
-function genData(pIndex = 0) {
-  const dataBlob = {};
-  for (let i = 0; i < NUM_ROWS; i++) {
-    const ii = (pIndex * NUM_ROWS) + i;
-    dataBlob[`${ii}`] = `row - ${ii}`;
-  }
-  return dataBlob;
-}
 
 class Project extends React.Component{
   constructor(props) {
@@ -59,6 +51,7 @@ class Project extends React.Component{
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
+    // this.initProjectList();
     this.state = {
       dataSource,
       isLoading: true,
@@ -66,20 +59,37 @@ class Project extends React.Component{
     };
   }
 
-  componentDidMount() {
-    /*setTimeout(() => {
-      this.rData = genData();
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        isLoading: false,
-      });
-    }, 10000);*/
-    this.rData = genData();
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    const { projectList } = nextProps.projectModel;
+    NUM_ROWS = projectList.length;
+    this.rData = this.genData();
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this.rData),
       isLoading: NUM_ROWS > 7
     });
   }
+
+  genData = (pIndex = 0) => {
+    const dataBlob = {};
+    for (let i = 0; i < NUM_ROWS; i++) {
+      const ii = (pIndex * NUM_ROWS) + i;
+      dataBlob[`${ii}`] = `row - ${ii}`;
+    }
+    return dataBlob;
+  }
+
+  initProjectList = () =>{
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'projectModel/getProjectList',
+      payload: {},
+    });
+    const { projectList } = this.props.projectModel;
+    NUM_ROWS = projectList.length;
+  };
+
   onEndReached = (event) => {
     this.setState({ isLoading: false });
   };
@@ -88,6 +98,7 @@ class Project extends React.Component{
     this.props.dispatch(routerRedux.push('progress',{ id: id }));
   };
   render() {
+    const { projectList } = this.props.projectModel;
     const separator = (sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
@@ -99,12 +110,9 @@ class Project extends React.Component{
         }}
       />
     );
-    let index = data.length - 1;
+    let index = 0;
     const row = (rowData, sectionID, rowID) => {
-      if (index < 0) {
-        index = data.length - 1;
-      }
-      const obj = data[index--];
+      const obj = projectList[index++];
       return (
         <div key={rowID} style={{ background: '#F5F5F9', padding: '0 15px' }} onClick={ () => this.handleData(obj.id)}>
           <div
@@ -115,13 +123,13 @@ class Project extends React.Component{
               fontSize: 18,
               borderBottom: '0px solid #F6F6F6',
             }}
-          >{obj.name}
+          >{obj.projectName}
           </div>
           <div style={{ display: 'inline', background: 'white', padding: '5px 0' }}>
             <div style={{ lineHeight: 1, padding: '0px 8px', background: 'white' }}>
               <div style={{ paddingBottom: '8px',  fontWeight: 'bold' }}>
                 <span style={{ fontSize: '16px', color: '#d81e06', }}>{obj.total}</span>
-                <span style={{ color: '#888', }}> 展会用户{obj.id}</span>
+                <span style={{ color: '#888', }}> 展会用户{obj.userCount}</span>
               </div>
             </div>
             <div style={{ marginTop: -54, marginRight: 15, float: 'right' }}>
