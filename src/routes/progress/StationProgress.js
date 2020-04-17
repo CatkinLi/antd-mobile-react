@@ -51,7 +51,7 @@ const Brief = Item.Brief;
 class StationProgress extends React.Component{
   constructor(props) {
     super(props);
-    console.log(this.props.location.state.id);
+    console.log(this.props.location.state);
   }
   cityData = (id) => {
     console.log(id);
@@ -72,7 +72,7 @@ class StationProgress extends React.Component{
                 data={data1}
                 columnNum={2}
                 itemStyle={{ height: 99 }}
-                renderItem={item => (
+                renderItem={(item) => (
                   <div style={{ padding: '12.5px' }}>
                     <div style={{ fontSize: '14px', marginTop: '12px' }}>
                       <span style={{ color: '#888', fontSize: '14px' }}>{item.title}</span>
@@ -113,17 +113,18 @@ class StationProgress extends React.Component{
                       {
                         data.map(
                           row => (<Text
-                            content={`${row.value.toFixed(0)}%`}
-                            top
-                            position={{
-                              gender: row.gender,
-                              value: 50,
-                            }}
-                            style={{
-                              opacity: 0.75,
-                              fontSize: window.innerWidth / 20,
-                              textAlign: 'center',
-                            }}
+                                  content={`${row.value.toFixed(0)}%`}
+                                  top
+                                  key={row.value}
+                                  position={{
+                                    gender: row.gender,
+                                    value: 50,
+                                  }}
+                                  style={{
+                                    opacity: 0.75,
+                                    fontSize: window.innerWidth / 20,
+                                    textAlign: 'center',
+                                  }}
                           />))
                       }
                     </Guide>
@@ -191,6 +192,7 @@ class StationProgress extends React.Component{
                           row => (<Text
                             content={`${row.value}%`}
                             top
+                            key={row.value}
                             position={{
                               gender: row.gender,
                               value: 50,
@@ -234,30 +236,6 @@ class StationProgress extends React.Component{
                   </div>
                 </div>
               </div>
-              {/*<List>
-                <Item
-                  multipleLine
-                  onClick={() => {}}
-                  platform="android"
-                >
-
-                </Item>
-                <Item
-                  multipleLine
-                  onClick={() => {}}
-                  platform="android"
-                >
-                  <div>
-                    <div>
-                      上海 8.9-8.11<span style={{ marginLeft: 20, width: 60, backgroundColor: '#92c152'}}> 已开展</span>
-                      <span style={{ float: 'right' }}>></span>
-                    </div>
-                    <div>
-                      索票
-                    </div>
-                  </div>
-                </Item>
-              </List>*/}
             </div>
             <WhiteSpace size="sm"/>
             <div style={{ margin: 10, height: 190, backgroundColor: '#fff' }}>
@@ -291,6 +269,7 @@ class StationProgress extends React.Component{
                           row => (<Text
                             content={`${row.value}%`}
                             top
+                            key={row.value}
                             position={{
                               gender: row.gender,
                               value: 50,
@@ -391,6 +370,7 @@ class StationProgress extends React.Component{
                           row => (<Text
                             content={`${row.value}%`}
                             top
+                            key={row.value}
                             position={{
                               gender: row.gender,
                               value: 50,
@@ -434,30 +414,6 @@ class StationProgress extends React.Component{
                   </div>
                 </div>
               </div>
-              {/*<List>
-                <Item
-                  multipleLine
-                  onClick={() => {}}
-                  platform="android"
-                >
-
-                </Item>
-                <Item
-                  multipleLine
-                  onClick={() => {}}
-                  platform="android"
-                >
-                  <div>
-                    <div>
-                      上海 8.9-8.11<span style={{ marginLeft: 20, width: 60, backgroundColor: '#92c152'}}> 已开展</span>
-                      <span style={{ float: 'right' }}>></span>
-                    </div>
-                    <div>
-                      索票
-                    </div>
-                  </div>
-                </Item>
-              </List>*/}
             </div>
           </div>
         </div>

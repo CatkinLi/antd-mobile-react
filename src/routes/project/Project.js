@@ -93,9 +93,9 @@ class Project extends React.Component{
   onEndReached = (event) => {
     this.setState({ isLoading: false });
   };
-  handleData = (id) => {
-    console.log(id);
-    this.props.dispatch(routerRedux.push('progress',{ id: id }));
+  handleData = (record) => {
+    console.log(record);
+    this.props.dispatch(routerRedux.push('progress',{ record: record }));
   };
   render() {
     const { projectList } = this.props.projectModel;
@@ -114,7 +114,7 @@ class Project extends React.Component{
     const row = (rowData, sectionID, rowID) => {
       const obj = projectList[index++];
       return (
-        <div key={rowID} style={{ background: '#F5F5F9', padding: '0 15px' }} onClick={ () => this.handleData(obj.id)}>
+        <div key={rowID} style={{ background: '#F5F5F9', padding: '0 15px' }} onClick={ () => this.handleData(obj)}>
           <div
             style={{
               background: 'white',

@@ -17,9 +17,9 @@ let devApi = isMock ? '' : 'http://localhost:1111';
 // pc网站地址
 let webDomain = 'http://192.168.1.60:8090';
 // crm 1.0测试地址
-let crmDomain = 'http://192.168.1.113:8089';
+let crmDomain = 'http://192.168.3.88:8000/login';
 // crm 1.0本地地址
-const devCrmDomain = 'http://localhost:8089';
+const devCrmDomain = 'http://localhost:8000/login';
 // webscoket服务
 let wsDomain = process.env.NODE_ENV === 'development' ? 'http://192.168.1.113:9094' : 'http://localhost:9094';
 if (debugProd) {
